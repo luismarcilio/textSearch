@@ -1,13 +1,11 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.service;
 
-import java.io.IOException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
 import com.luismarcilio.grocery_brasil_app.textSearch.repository.ProductRepository;
 
-import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.stereotype.Service;
 
 
@@ -24,7 +22,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public Stream<Product> findByNameText(String name) throws ParseException, IOException{
+    public Stream<Product> findByNameText(String name){
         return productRepository.findByNameText(name, 10);
     }
 
