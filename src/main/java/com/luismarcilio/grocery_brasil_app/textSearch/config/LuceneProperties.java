@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class LuceneProperties {
     @Bean
     @ConfigurationProperties(prefix="lucene.directory")
-    public DirectoryConfig getDirectoryConfig(){
-        return new DirectoryConfig();
+    public DirectoryPath getDirectoryPath(){
+        return new DirectoryPath();
     }
 }
