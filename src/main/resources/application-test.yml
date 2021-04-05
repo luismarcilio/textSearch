@@ -1,0 +1,3 @@
+lucene:
+    directory:
+        path: file:///tmp/lucene_index_test
