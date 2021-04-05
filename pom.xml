@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.luismarcilio.grocery_brasil_app</groupId>
 	<artifactId>textSearch</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>textSearch</name>
 	<description>Text search engine for grocery_brasil_app</description>
 	<properties>
