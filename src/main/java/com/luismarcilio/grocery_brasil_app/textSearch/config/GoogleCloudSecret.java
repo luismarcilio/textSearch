@@ -9,6 +9,9 @@ import java.io.IOException;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.secretmanager.v1.*;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,14 +32,20 @@ public class GoogleCloudSecret {
     }
     
     @Bean(name="ApiKey")
-    public String getApiKey(){
+    public String getApiKey() throws ParseException{
         try {
             log.info("Google Credentials: {}", GoogleCredentials.getApplicationDefault());
         } catch (IOException e) {
             throw new ProductRepositoryRuntimeException(e);
         }
         AccessSecretVersionResponse response = client.accessSecretVersion(SecretVersionName.of(this.projectId, this.secretId, "latest"));
-        return response.getPayload().getData().toStringUtf8();
+        String secretPayload = response.getPayload().getData().toStringUtf8();
+        return getApiKeyFromJson(secretPayload);
     }
 
+    private String getApiKeyFromJson(String json) throws ParseException{
+        JSONParser parser = new JSONParser();    
+        JSONObject jsonObject = (JSONObject) parser.parse(json);
+        return (String) jsonObject.get("apiId");
+    }
 }
