@@ -6,6 +6,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
+import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.IndexWriter;
@@ -35,20 +37,24 @@ public class LuceneConfig {
     }
 
     @Bean
+	@WithLog
     public Directory getDirectory(){
         return this.directory;
     }
     @Bean 
+	@WithLog
     public IndexWriter getIndexWriter(){
         return this.indexWriter;
     }
 
     @Bean  
+	@WithLog
     public Analyzer getAnalyzer(){
         return this.analyzer;
     }
 
     @Bean 
+	@WithLog
     SearcherManager getSearcherManager() throws IOException{        
         return new SearcherManager(indexWriter,null);
     }

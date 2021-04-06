@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.ProductNotFoundException;
 import com.luismarcilio.grocery_brasil_app.textSearch.service.ProductService;
@@ -27,11 +28,13 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
+	@WithLog
     public Product getProductById(@PathVariable String id) {
         return productService.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @PostMapping("/product")
+	@WithLog
     public Object addProduct(@RequestBody Product product) {
         productService.save(product);
         // Create resource location
@@ -43,11 +46,13 @@ public class ProductController {
         return ResponseEntity.created(location).build();
     }
     @GetMapping("/product")
+    @WithLog
     public List<Product> getProductsByNameText(@RequestParam(name="text") String text){
         return productService.findByNameText(text).collect(Collectors.toList());
     }
 
     @GetMapping("/product/all")
+	@WithLog
     public List<Product> getAllProducts() {
         return productService.findAll().collect(Collectors.toList());
     }

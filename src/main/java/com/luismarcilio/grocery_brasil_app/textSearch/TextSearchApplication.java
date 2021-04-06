@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TextSearchApplication {
 
+	@WithLog
 	public static void main(String[] args) {
 		SpringApplication.run(TextSearchApplication.class, args);
 	}
