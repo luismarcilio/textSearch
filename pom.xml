@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.luismarcilio.grocery-brasil-app</groupId>
 	<artifactId>text-search</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>textSearch</name>
 	<description>Text search engine for grocery_brasil_app</description>
 	<properties>
@@ -60,7 +60,10 @@
 			<artifactId>google-cloud-secretmanager</artifactId>
 			<version>1.4.2</version>
 		</dependency>
-
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-aop</artifactId>
+			</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
