@@ -97,12 +97,22 @@ public class IntegrationTests {
 
                 request = new HttpEntity<>(null, headers);
 
-                ResponseEntity<Product[]> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product/?text=Cerveja",
+                ResponseEntity<Product[]> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product?text=Cerveja",
                         HttpMethod.GET, 
                         request, 
                         Product[].class);
+                assertEquals(200, responseEntity.getStatusCodeValue());
                 assertArrayEquals(expected.toArray(), responseEntity.getBody());
 
+
+
+                responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product/all",
+                        HttpMethod.GET, 
+                        request, 
+                        Product[].class);
+
                 assertEquals(200, responseEntity.getStatusCodeValue());
+                assertArrayEquals(productInputList.toArray(), responseEntity.getBody());
+
         }
 }

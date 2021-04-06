@@ -1,6 +1,5 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.controller;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +8,6 @@ import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.ProductNotFoundException;
 import com.luismarcilio.grocery_brasil_app.textSearch.service.ProductService;
 
-import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,8 +43,13 @@ public class ProductController {
         return ResponseEntity.created(location).build();
     }
     @GetMapping("/product")
-    public List<Product> getProductsByNameText(@RequestParam(name="text") String text) throws ParseException, IOException{
+    public List<Product> getProductsByNameText(@RequestParam(name="text") String text){
         return productService.findByNameText(text).collect(Collectors.toList());
+    }
+
+    @GetMapping("/product/all")
+    public List<Product> getAllProducts() {
+        return productService.findAll().collect(Collectors.toList());
     }
 
 }

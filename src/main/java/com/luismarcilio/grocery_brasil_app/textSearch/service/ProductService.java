@@ -29,4 +29,8 @@ public class ProductService {
     public Optional<Product> findById(String id){
         return productRepository.findById(id);
     }
+
+    public Stream<Product> findAll() {
+        return productRepository.findAll();
+    }
 }
