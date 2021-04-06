@@ -1,3 +1,8 @@
+
+logging:
+    level:
+        com.luismarcilio.grocery_brasil_app.textSearch.LoggerAspect: DEBUG
+
 lucene:
     directory:
         path: file:///tmp/lucene_index_test
