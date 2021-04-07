@@ -55,7 +55,7 @@ public class IntegrationTests {
         public void shouldInsertaProduct() throws URISyntaxException {
                 final String url = "http://localhost:" + port + "/product/";
                 final HttpHeaders headers = new HttpHeaders();
-                headers.set("X-API-KEY", apiKey);        
+                headers.set("x-api-key", apiKey);        
 
                 final Product product = Product.builder().id("id01").name("Cerveja Backer").eanCode("someEanCode")
                                 .ncmCode("someNcmCode").unity(new Unity("Lt")).thumbnail("http://somethumbnail")

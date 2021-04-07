@@ -25,7 +25,7 @@ public class APISecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
 	@WithLog
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        APIKeyAuthFilter filter = new APIKeyAuthFilter("X-API-KEY");
+        APIKeyAuthFilter filter = new APIKeyAuthFilter("x-api-key");
         filter.setAuthenticationManager(new AuthenticationManager() {
 
             @Override
