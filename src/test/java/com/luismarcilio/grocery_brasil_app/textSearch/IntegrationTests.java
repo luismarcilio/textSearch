@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.luismarcilio.grocery_brasil_app.textSearch.config.DirectoryPath;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
+import com.luismarcilio.grocery_brasil_app.textSearch.domain.Products;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Unity;
 
 import org.assertj.core.util.Lists;
@@ -97,22 +98,22 @@ public class IntegrationTests {
 
                 request = new HttpEntity<>(null, headers);
 
-                ResponseEntity<Product[]> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product?text=Cerveja",
+                ResponseEntity<Products> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product?text=Cerveja",
                         HttpMethod.GET, 
                         request, 
-                        Product[].class);
+                        Products.class);
                 assertEquals(200, responseEntity.getStatusCodeValue());
-                assertArrayEquals(expected.toArray(), responseEntity.getBody());
+                assertArrayEquals(expected.toArray(), responseEntity.getBody().getProductList().toArray());
 
 
 
                 responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product/all",
                         HttpMethod.GET, 
                         request, 
-                        Product[].class);
+                        Products.class);
 
                 assertEquals(200, responseEntity.getStatusCodeValue());
-                assertArrayEquals(productInputList.toArray(), responseEntity.getBody());
+                assertArrayEquals(productInputList.toArray(), responseEntity.getBody().getProductList().toArray());
 
         }
 }

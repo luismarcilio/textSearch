@@ -1,7 +1,6 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.controller;
 
 import java.net.URI;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -9,6 +8,7 @@ import javax.validation.Valid;
 import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.ProductNotFoundException;
+import com.luismarcilio.grocery_brasil_app.textSearch.domain.Products;
 import com.luismarcilio.grocery_brasil_app.textSearch.service.ProductService;
 
 import org.springframework.http.ResponseEntity;
@@ -49,14 +49,14 @@ public class ProductController {
     }
     @GetMapping("/product")
     @WithLog
-    public List<Product> getProductsByNameText(@RequestParam(name="text") String text){
-        return productService.findByNameText(text).collect(Collectors.toList());
+    public Products getProductsByNameText(@RequestParam(name="text") String text){
+        return new Products(productService.findByNameText(text).collect(Collectors.toList()));
     }
 
     @GetMapping("/product/all")
 	@WithLog
-    public List<Product> getAllProducts() {
-        return productService.findAll().collect(Collectors.toList());
+    public Products getAllProducts() {
+        return new Products(productService.findAll().collect(Collectors.toList()));
     }
 
 }
