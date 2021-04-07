@@ -17,11 +17,11 @@ public class DocumentFromProduct implements DocumentFromEntity<Product>{
         document.add(new StringField("id", product.getId(), Field.Store.YES));
         document.add(new TextField("name", product.getName(), Field.Store.YES));
         document.add(new StoredField("eanCode", product.getEanCode()));
-        document.add(new StoredField("ncmCode", product.getNcmCode()));
+        if(product.getNcmCode() != null) document.add(new StoredField("ncmCode", product.getNcmCode()));
         document.add(new StoredField("normalized", product.isNormalized()?"true":"false"));
-        document.add(new StoredField("thumbnail", product.getThumbnail()));
+        if(product.getThumbnail() != null) document.add(new StoredField("thumbnail", product.getThumbnail()));
         document.add(new StoredField("normalizationStatus", product.getNormalizationStatus()));
-        document.add(new StoredField("unity.name", product.getUnity().getName()));
+        if(product.getUnity() != null && product.getUnity().getName() != null) document.add(new StoredField("unity.name", product.getUnity().getName()));
         return document;
     }
 
