@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Product {
     @NotNull
+    @NotEmpty
     private String id;
+    @NotNull
     @NotEmpty
     private String name;
     private String eanCode;    
