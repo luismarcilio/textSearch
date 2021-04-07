@@ -1,5 +1,8 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.domain;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Product {
+    @NotNull
     private String id;
+    @NotEmpty
     private String name;
     private String eanCode;    
     private String ncmCode;    

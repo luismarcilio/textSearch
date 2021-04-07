@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.ProductNotFoundException;
@@ -35,7 +37,7 @@ public class ProductController {
 
     @PostMapping("/product")
 	@WithLog
-    public Object addProduct(@RequestBody Product product) {
+    public Object addProduct(@RequestBody @Valid Product product) {
         productService.save(product);
         // Create resource location
         URI location = ServletUriComponentsBuilder
