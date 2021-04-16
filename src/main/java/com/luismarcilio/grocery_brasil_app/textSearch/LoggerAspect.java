@@ -16,6 +16,9 @@ public class LoggerAspect {
 
     @Around("@annotation(com.luismarcilio.grocery_brasil_app.textSearch.WithLog)")
     public Object doLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+        if(!log.isDebugEnabled()){
+            return proceedingJoinPoint.proceed();
+        }
         StringBuilder stringBuilder = new StringBuilder();
         try{
             stringBuilder.append(proceedingJoinPoint.getSignature().getName()+"(");
