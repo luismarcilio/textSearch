@@ -3,6 +3,7 @@ package com.luismarcilio.grocery_brasil_app.textSearch.config;
 import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,7 @@ import org.springframework.security.core.AuthenticationException;
 public class APISecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    @Qualifier("ApiKey")
     private String apiKey;
 
     @Override
