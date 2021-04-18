@@ -1,13 +1,13 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.domain;
 
-import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
+import com.luismarcilio.grocery_brasil_app.textSearch.WithDebug;
 
 import org.apache.lucene.document.Document;
 
 public class ProductFromDocument implements EntityFromDocument<Product> {
 
     @Override
-	@WithLog
+	@WithDebug
     public Product getEntity(Document document) {
         return Product.builder()
             .id(document.getField("id")==null?null:document.getField("id").stringValue())

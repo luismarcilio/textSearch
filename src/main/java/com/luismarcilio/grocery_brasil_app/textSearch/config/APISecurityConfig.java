@@ -1,6 +1,6 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.config;
 
-import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
+import com.luismarcilio.grocery_brasil_app.textSearch.WithDebug;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +25,7 @@ public class APISecurityConfig extends WebSecurityConfigurerAdapter {
     private String apiKey;
 
     @Override
-	@WithLog
+	@WithDebug
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         APIKeyAuthFilter filter = new APIKeyAuthFilter("x-api-key");
         filter.setAuthenticationManager(new AuthenticationManager() {

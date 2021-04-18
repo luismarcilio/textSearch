@@ -3,7 +3,7 @@ package com.luismarcilio.grocery_brasil_app.textSearch.service;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
+import com.luismarcilio.grocery_brasil_app.textSearch.WithDebug;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
 import com.luismarcilio.grocery_brasil_app.textSearch.repository.ProductRepository;
 
@@ -19,21 +19,21 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-	@WithLog
+	@WithDebug
     public void save(Product product){
         productRepository.save(product);
     }
 
-	@WithLog
+	@WithDebug
     public Stream<Product> findByNameText(String name){
         return productRepository.findByNameText(name, 10);
     }
 
-	@WithLog
+	@WithDebug
     public Optional<Product> findById(String id){
         return productRepository.findById(id);
     }
-	@WithLog
+	@WithDebug
     public Stream<Product> findAll() {
         return productRepository.findAll();
     }

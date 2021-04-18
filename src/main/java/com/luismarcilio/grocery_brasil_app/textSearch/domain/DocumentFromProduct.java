@@ -1,6 +1,6 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.domain;
 
-import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
+import com.luismarcilio.grocery_brasil_app.textSearch.WithDebug;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -11,7 +11,7 @@ import org.apache.lucene.document.TextField;
 public class DocumentFromProduct implements DocumentFromEntity<Product>{
 
     @Override
-	@WithLog
+	@WithDebug
     public Document getDocument(Product product) {
         Document document = new Document();
         document.add(new StringField("id", product.getId(), Field.Store.YES));

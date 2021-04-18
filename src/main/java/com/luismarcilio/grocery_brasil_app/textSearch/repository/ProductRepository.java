@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import com.luismarcilio.grocery_brasil_app.textSearch.WithLog;
+import com.luismarcilio.grocery_brasil_app.textSearch.WithDebug;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.DocumentFromProduct;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.Product;
 import com.luismarcilio.grocery_brasil_app.textSearch.domain.ProductFromDocument;
@@ -40,7 +40,7 @@ public class ProductRepository implements CrudRepository<Product,String>{
     }
     
     @Override
-	@WithLog
+	@WithDebug
     public void save(Product entity) {
         DocumentFromProduct documentFromProduct = new DocumentFromProduct();
         try {
@@ -52,7 +52,7 @@ public class ProductRepository implements CrudRepository<Product,String>{
     }
 
     @Override
-	@WithLog
+	@WithDebug
     public void saveAll(List<Product> entityList) {
         for(Product entity : entityList){
             this.save(entity);
@@ -60,7 +60,7 @@ public class ProductRepository implements CrudRepository<Product,String>{
         
     }
 
-	@WithLog
+	@WithDebug
     private Product findByDocId(Integer id) {
         Document doc;
         IndexSearcher indexSearcher;
@@ -86,7 +86,7 @@ public class ProductRepository implements CrudRepository<Product,String>{
         } 
     }
 
-	@WithLog
+	@WithDebug
     public Stream<Product> findAll(){
         Query query = new MatchAllDocsQuery();
         IndexSearcher indexSearcher;
@@ -113,7 +113,7 @@ public class ProductRepository implements CrudRepository<Product,String>{
         }
     }
 
-	@WithLog
+	@WithDebug
     public Stream<Product> findByNameText(String text, int numberOfResults){
         QueryParser parser = new QueryParser("name", analyzer);
         Query query;
@@ -147,7 +147,7 @@ public class ProductRepository implements CrudRepository<Product,String>{
     }
 
     @Override
-	@WithLog
+	@WithDebug
     public Optional<Product> findById(String id) {
         QueryParser parser = new QueryParser("id", analyzer);
         Query query;

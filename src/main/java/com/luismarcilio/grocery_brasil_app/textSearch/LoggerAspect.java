@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoggerAspect {
 
-    @Around("@annotation(com.luismarcilio.grocery_brasil_app.textSearch.WithLog)")
+    @Around("@annotation(com.luismarcilio.grocery_brasil_app.textSearch.WithDebug)")
     public Object doLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
         if(!log.isDebugEnabled()){
             return proceedingJoinPoint.proceed();
