@@ -1,0 +1,16 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/grocery-brasil-app/text-search', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/grocery-brasil-app/text-search']
+  # Deploy container image to k8s text-search cluster
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+    - run
+    - --filename=TextsearchService.yaml
+    - --image=gcr.io/grocery-brasil-app/text-search
+    - --location=us-central1
+    - --cluster=text-search
+images:
+  - gcr.io/grocery-brasil-app/text-search
