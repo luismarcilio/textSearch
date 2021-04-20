@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
@@ -29,13 +31,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
 	@WithDebug
     public Product getProductById(@PathVariable String id) {
         return productService.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
-    @PostMapping("/product")
+    @PostMapping("/")
 	@WithDebug
     public Object addProduct(@RequestBody @Valid Product product) {
         productService.save(product);
@@ -47,13 +49,13 @@ public class ProductController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-    @GetMapping("/product")
+    @GetMapping("/")
     @WithDebug
     public Products getProductsByNameText(@RequestParam(name="text") String text){
         return new Products(productService.findByNameText(text).collect(Collectors.toList()));
     }
 
-    @GetMapping("/product/all")
+    @GetMapping("/all")
 	@WithDebug
     public Products getAllProducts() {
         return new Products(productService.findAll().collect(Collectors.toList()));
