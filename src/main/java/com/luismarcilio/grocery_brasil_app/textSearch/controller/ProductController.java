@@ -37,7 +37,7 @@ public class ProductController {
         return productService.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
-    @PostMapping("/")
+    @PostMapping("")
 	@WithDebug
     public Object addProduct(@RequestBody @Valid Product product) {
         productService.save(product);
@@ -49,7 +49,7 @@ public class ProductController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-    @GetMapping("/")
+    @GetMapping("")
     @WithDebug
     public Products getProductsByNameText(@RequestParam(name="text") String text){
         return new Products(productService.findByNameText(text).collect(Collectors.toList()));
