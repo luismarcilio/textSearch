@@ -7,7 +7,7 @@ lucene:
         path: file:///tmp/lucene_index
 logging:
     level:
-        springfox.documentation: DEBUG
+        com.luismarcilio.grocery_brasil_app.textSearch.LoggerAspect: DEBUG
 # springfox:
 #     documentation:
 #         swagger-ui:
