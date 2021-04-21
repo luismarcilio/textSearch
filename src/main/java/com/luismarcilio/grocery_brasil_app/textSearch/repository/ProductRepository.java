@@ -103,6 +103,8 @@ public class ProductRepository implements CrudRepository<Product,String>{
             return Arrays.stream(docs.scoreDocs).map(scoreDoc -> findByDocId(scoreDoc.doc));
         } catch (IOException e) {
             throw new ProductRepositoryRuntimeException(e);
+        } catch(IllegalArgumentException e){
+            return Stream.empty();
         }
         finally{
             try {
