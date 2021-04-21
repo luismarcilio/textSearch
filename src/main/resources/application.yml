@@ -1,5 +1,17 @@
 server:
     port: ${PORT:8080}
+    servlet:
+        context-path: /
 lucene:
     directory:
         path: file:///tmp/lucene_index
+logging:
+    level:
+        springfox.documentation: DEBUG
+# springfox:
+#     documentation:
+#         swagger-ui:
+#             base-url: /documentation
+#         swagger:
+#             v2:
+#                 use-model-v3: false
