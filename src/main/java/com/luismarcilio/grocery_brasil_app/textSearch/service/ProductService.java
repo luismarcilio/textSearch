@@ -29,6 +29,11 @@ public class ProductService {
         return productRepository.findByNameText(name, 10);
     }
 
+    @WithDebug
+    public Stream<Product> fuzzyFindByNameText(String name){
+        return productRepository.fuzzyFindByNameText(name, 100);
+    }
+
 	@WithDebug
     public Optional<Product> findById(String id){
         return productRepository.findById(id);

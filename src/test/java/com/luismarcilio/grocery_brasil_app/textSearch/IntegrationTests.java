@@ -98,7 +98,7 @@ public class IntegrationTests {
 
                 request = new HttpEntity<>(null, headers);
 
-                ResponseEntity<Products> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product?text=Cerveja",
+                ResponseEntity<Products> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/product?text=Cervej",
                         HttpMethod.GET, 
                         request, 
                         Products.class);

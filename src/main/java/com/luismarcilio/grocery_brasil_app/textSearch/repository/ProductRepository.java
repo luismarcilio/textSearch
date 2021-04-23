@@ -17,6 +17,7 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
@@ -105,6 +106,33 @@ public class ProductRepository implements CrudRepository<Product,String>{
             throw new ProductRepositoryRuntimeException(e);
         } catch(IllegalArgumentException e){
             return Stream.empty();
+        }
+        finally{
+            try {
+                searcherManager.release(indexSearcher);
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            }
+        }
+    }
+
+    @WithDebug
+    public Stream<Product> fuzzyFindByNameText(String text, int numberOfResults){
+        Term term = new Term("name", text);
+        Query query = new FuzzyQuery(term);
+        IndexSearcher indexSearcher;
+        try {
+            searcherManager.maybeRefresh();
+            indexSearcher = searcherManager.acquire();
+        } catch (IOException e1) {
+            throw new ProductRepositoryRuntimeException(e1);
+
+        }
+        try {
+            TopDocs docs = indexSearcher.search(query, numberOfResults);
+            return Arrays.stream(docs.scoreDocs).map(scoreDoc -> findByDocId(scoreDoc.doc));
+        } catch (IOException e) {
+            throw new ProductRepositoryRuntimeException(e);
         }
         finally{
             try {

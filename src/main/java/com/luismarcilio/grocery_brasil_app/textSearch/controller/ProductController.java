@@ -52,7 +52,7 @@ public class ProductController {
     @GetMapping("")
     @WithDebug
     public Products getProductsByNameText(@RequestParam(name="text") String text){
-        return new Products(productService.findByNameText(text).collect(Collectors.toList()));
+        return new Products(productService.fuzzyFindByNameText(text).collect(Collectors.toList()));
     }
 
     @GetMapping("/all")
