@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import com.luismarcilio.grocery_brasil_app.textSearch.WithDebug;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.br.BrazilianAnalyzer;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.search.SearcherManager;
@@ -31,7 +31,7 @@ public class LuceneConfig {
     @Autowired
     public LuceneConfig(DirectoryPath directoryPath) throws IOException, URISyntaxException{
         this.directory = open(Paths.get(new URI(directoryPath.getPath())));
-        this.analyzer = new StandardAnalyzer();
+        this.analyzer = new BrazilianAnalyzer();
         this.indexWriterConfig = new IndexWriterConfig(analyzer);
         this.indexWriter = new IndexWriter(this.directory, this.indexWriterConfig);
     }
