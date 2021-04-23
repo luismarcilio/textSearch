@@ -11,41 +11,31 @@ spec:
   gcePersistentDisk:
     pdName: lucene-directory-volume
     fsType: ext4
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: failure-domain.beta.kubernetes.io/zone
-          operator: In
-          values:
-          - us-central1-a
-          - us-central1-b
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: lucene-directory-volume-pvc-rw
 spec:
+  storageClassName: ""
+  volumeName: lucene-directory-volume
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: text-search
-  labels:
-    app: text-search
 spec:
+  serviceName: text-search
+  podManagementPolicy: "Parallel"
   replicas: 1
   selector:
     matchLabels:
       app: text-search
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
