@@ -4,7 +4,7 @@ metadata:
   name: lucene-directory-volume
 spec:
   capacity:
-    storage: 200Gi
+    storage: 10Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -91,9 +91,9 @@ spec:
             ephemeral-storage: 1Gi
             memory: 2Gi
           requests:
-            cpu: 250m
+            cpu: 100m
             ephemeral-storage: 512Mi
-            memory: 512Mi
+            memory: 256Mi
 ---
 apiVersion: "v1"
 kind: "Service"
