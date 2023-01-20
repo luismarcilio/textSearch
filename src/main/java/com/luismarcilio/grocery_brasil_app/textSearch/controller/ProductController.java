@@ -1,6 +1,7 @@
 package com.luismarcilio.grocery_brasil_app.textSearch.controller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -52,7 +53,11 @@ public class ProductController {
     @GetMapping("")
     @WithDebug
     public Products getProductsByNameText(@RequestParam(name="text") String text){
-        return new Products(productService.fuzzyFindByNameText(text).collect(Collectors.toList()));
+        List<Product> productList = productService.findByNameText(text).collect(Collectors.toList());
+        if(productList.size()==0){
+            productList = productService.fuzzyFindByNameText(text).collect(Collectors.toList());
+        }
+        return new Products(productList);
     }
 
     @GetMapping("/all")
